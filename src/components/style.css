@@ -1,0 +1,49 @@
+.movieCard {
+    display: block;
+    height: 300px;
+    width: 250px;
+    border-radius: 25px;
+    justify-content: center;
+    word-break: break-all;
+    text-align: center;
+    color: white;
+}
+.remove:hover{
+    cursor: pointer;
+}
+.remove {
+    border-radius: 5px;
+    background-color: rgb(98, 100, 228);
+    width: 200px;
+}
+.title{
+    color: red;
+    font-weight: 700px;
+}
+img
+{width: 250px;
+height: 300px;}
+.movieList{
+    display: grid;
+  gap: 30px;
+    grid-template-columns: 250px 250px;
+align-content: center;
+justify-content: center;
+
+
+}
+.App{
+text-align: center;
+justify-content: center;
+align-items: center;
+}
+body{
+    background-color: rgb(35, 191, 196);
+}   
+.addmovie{
+    justify-content: center ;
+    align-items: center;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+}

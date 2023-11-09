@@ -1,10 +1,10 @@
 import './style.css'
 import Movie from "./Movie";
-const MovieList =({movies})=>{
+const MovieList =({movies,handleDelete})=>{
     return (
         <div className='movieList'>
             {movies.map((mov,index)=>
-                <Movie key={index} {...mov}/>)}
+                <Movie handleDelete={handleDelete} key={index} {...mov}/>)}
         </div>
     )
 }

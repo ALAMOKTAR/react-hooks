@@ -1,20 +1,18 @@
-import React from 'react';
+import React from "react";
 
-function Filter({ onFilterChange }) {
+const Filter = ({ handleTitleChange, handleRateChange }) => {
   return (
-    <div className="filter">
+    <div>
       <input
         type="text"
-        placeholder="Filter by title"
-        onChange={(e) => onFilterChange(e.target.value, 'title')}
+        placeholder="search par title"
+        onChange={handleTitleChange}
       />
-      <input
-        type="number"
-        placeholder="search by rating"
-        onChange={(e) => onFilterChange(e.target.value, 'rating')}
+      <input placeholder="search par rate"
+        onChange={handleRateChange}
       />
     </div>
   );
-}
+};
 
 export default Filter;

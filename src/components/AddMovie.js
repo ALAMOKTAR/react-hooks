@@ -1,34 +1,35 @@
-import {useState,useRef, useEffect} from 'react'
+import {useState} from 'react'
 import './style.css'
-// let  
-// export { movies};
-const AddMovie =(movies)=>{
-    const [title,setTitle]=useState()
-    const [description,setDescription]=useState()
-    const [imgUrl,setImgUrl]=useState()
-    const [rate,setRate]=useState(0)
-    let   [movie,setMovie]=useState([{}])
-    let   [mov,setMov]=useState([])
-let titleref=useRef()
-let descref=useRef()
-let imgref=useRef()
-let rateref=useRef()
-const handleclick =()=>{
-    setTitle(titleref.current.value)
-    setDescription(descref.current.value)
-    setImgUrl(imgref.current.value)
-    setRate(rateref.current.value)
-    setMovie([title,description,imgUrl,rate])
-    setMov([...mov,...movie])
-    console.log(movies)
+const AddMovie =({handleAddMovie})=>{
+    const [newMovie, setNewMovie] = useState({
+        title: "",
+        description: "",
+        imgUrl: "",
+        rate: "",
+      });
+const handleChange= (e)=>{
+    const {name,value} = e.target;
+    setNewMovie((movie)=>({...movie,[name]:value,}))
+
+    
 }
+    const handleclick = () => {
+    console.log(newMovie)
+        handleAddMovie(newMovie);
+        setNewMovie({
+          title: "",
+          description: "",
+          imgURL: "",
+          rate: "",
+        });
+      };
 return(
 <div>
     <div className='addmovie'>
-    <input ref={titleref} placeholder='Type Movie title to add'/>
-    <input ref={descref} placeholder='your movie description'/>
-    <input ref={imgref} placeholder='add your movie image'/>
-    <input ref={rateref} placeholder='your movie rate'/>
+    <input name='title'  onChange={handleChange} placeholder='Type Movie title to add'/>
+    <input name='description' onChange={handleChange} placeholder='your movie description'/>
+    <input name='imgUrl' onChange={handleChange} placeholder='add your movie image'/>
+    <input name='rate' onChange={handleChange} placeholder='your movie rate'/> 
     <button onClick={handleclick}> Add Movie</button>
     </div>
 </div>

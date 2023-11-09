@@ -3,56 +3,60 @@ import AddMovie from "./components/AddMovie";
 import Filter from "./components/Filter";
 import MovieList from "./components/MovieList";
 import './components/style.css'
+import NavBar from "./components/NavBar";
+import {Route,Routes} from 'react-router-dom'
+import Home from './components/Home'
+import { Series } from "./components/Links";
 function App() {
-  const [movies,setMoies] = useState([
-    {id:1,
-        title: 'Uncharted',
-        description:'adventure , action , drama , horror',
-        rate:5,
+let  [movies,setMovies] = useState([
+  {title:'One Piece',description:'Comedy , Adventure , Action' ,rate:10,imgUrl:'https://upload.wikimedia.org/wikipedia/en/b/b0/Dead_End_no_B%C5%8Dken.jpg'},
+   {title:'Attack on Titan',description:'Maset',rate:2,imgUrl:'https://m.media-amazon.com/images/I/91HfjIdXvrL._AC_UF1000,1000_QL80_.jpg' },
+   {title: 'Uncharted',description:'adventure , action , drama , horror',rate:5,
     imgUrl:'https://image.api.playstation.com/vulcan/img/rnd/202010/2620/gPTPUF3mT9FXELav8OKXmr9j.png'},
-{id:2,
+{
     title: 'commondo',
     description:'adventure , action , drama ',
     rate:9,
     imgUrl:'https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Commando_%282013_film%29.jpg/220px-Commando_%282013_film%29.jpg'},
 ])
-// const [filtert,setFiltert]=useState()
-// const [filterrat,setFilterrat]=useState()
 
-const [filteredMovies, setFilteredMovies] = useState(movies);
+ const handleDelete = (index) =>{
+ movies = movies.filter((ele)=>ele.index!==index)
+ }
+const [titleFiltre, setTitleFiltre] = useState("");
+  const [rateFiltre, setRateFiltre] = useState(0);
 
-const handleFilterChange = (value, field) => {
-  if (field === 'title') {
-    const filtered = movies.filter((movie) =>
-      movie.title.toLowerCase().includes(value.toLowerCase())
-    );
-    setFilteredMovies(filtered);
-  } else if (field === 'rate') {
-    const filtered = movies.filter((movie) => movie.rate >= parseFloat(value));
-    setFilteredMovies(filtered);
-  }
+const handleTitleChange = (event) => {
+  setTitleFiltre(event.target.value);
 };
-// const filtertitle =(e)=>{
-//   setFiltert(e.target.value)
-// console.log(e)
-// }
-// const filterrate =(e)=>{
-//   setFilterrat(e.target.value)
-// const filtermovie = (filtert,filterrat)=>{
-//   movies.filter(movies.rate >=filterrat)
 
-// }
-// }
-  // const handleDelete = (id) =>{
-// const newList = Movies.filter((ele)=>{ele.id!==id})
-// }
- 
+const handleRateChange = (event) => {
+  setRateFiltre(event.target.value);
+};
+
+const moviesFiltres = movies.filter(
+  (film) =>
+    film.title.toLowerCase().includes(titleFiltre.toLowerCase()) &&
+    film.rate >= rateFiltre
+);
+const handleAddMovie = (newMovie)=>{
+  setMovies([newMovie,...movies])
+}
   return (
+
     <div className="App">
+      <NavBar/>
+      <div className="filter">
       <h1> welcome to My Movie Store </h1> 
-      <Filter  onFilterChange={handleFilterChange}/>
-      <AddMovie/>
-      <MovieList movies={movies}/>
+
+      </div>
+      <Filter  handleTitleChange={handleTitleChange} handleRateChange={handleRateChange} />
+      <AddMovie handleAddMovie={handleAddMovie}/>
+      <MovieList movies={moviesFiltres} handleDelete={handleDelete} />
+  {/* <Routes>
+  <Route path="/" element={<Home />} />
+  <Route path="/movieslist" element={<Series/>} />
+  </Routes> */}
          </div>
   );
  }
